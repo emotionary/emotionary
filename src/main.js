@@ -30,6 +30,10 @@ App.MainState = function(){
 	this.MODE_CLICK_ON_TEST = 10;
 	this.MODE_CLICK_ON_CLEAR = 11;
 	
+	//모드 추가 (12,13)
+	this.MODE_DRAW_SUBMIT = 12;
+	this.MODE_DO_DRAW_SUBMIT = 13;
+
 	this.mode = this.MODE_INIT;
 	
 	this.dataset = 0;
@@ -167,24 +171,46 @@ App.MainState.prototype = {
 					this.painter.draw(this.game.input.x, this.game.input.y);
 					
 				} else {
-					this.painter.recognize();
+					//제출 눌렀을때 분석하도록 변경할것이므로 일단 주석처리
+					//this.painter.recognize();
 				}
 
 				break;
 				
 
+			// 제출 버튼 눌렀을때 (추가한 모드)
+			case this.MODE_DRAW_SUBMIT:
+				this.ui.showStatusBar("MODE : this.MODE_DRAW_SUBMIT");
+
+				this.painter.recognize(); // 기존 : 마우스 다운 기준으로 분석
+											// -> 변경 : 제출 버튼 누르면 분석
+
+				//this.mode = this.MODE_DO_DRAW_SUBMIT; 나중에 필요하면 추가
+				break;
+			
+			
+			// 그림 분석 중 버튼, UI 수정 (추가한 모드)
+			case this.MODE_DO_DRAW_SUBMIT:
+
+				break;
+			
 			case this.MODE_CLICK_ON_TRAIN:
 				this.mode = this.MODE_START_TRAIN;
 				break;
 			
+
 			case this.MODE_CLICK_ON_TEST:
 				this.mode = this.MODE_START_PREDICT;
 				break;
-				
+			
+
 
 			case this.MODE_CLICK_ON_CLEAR:
 				this.painter.reset();
 				this.ui.txtDoodlePrediction.setText("");
+				
+				// painter.reset() 후 이모티콘 삭제 처리 되지 않으면 
+				// painter에 삭제함수 만들고 여기에 불러와서 삭제 처리
 				
 				this.mode = this.MODE_DRAW;
 				break;

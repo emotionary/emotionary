@@ -69,30 +69,33 @@ UI.prototype.enableButtons = function(){
 	this.btnClear.revive();
 };
 
-
+// 제출 후에도 학습버튼 활성화 되도록 변경
 UI.prototype.onTrainClick = function(){
-	if (this.main.mode == this.main.MODE_DRAW){
+	if (this.main.mode == this.main.MODE_DRAW || this.main.mode == this.main.MODE_DRAW_SUBMIT){
 		this.main.mode = this.main.MODE_CLICK_ON_TRAIN;
 	}
 };
 
-
-UI.prototype.onTestClick = function(){
-	if (this.main.mode == this.main.MODE_DRAW){
+// 제출 후에도 검증버튼 활성화 되도록 변경
+UI.prototype.onTestClick = function(){ 
+	if ((this.main.mode == this.main.MODE_DRAW) || (this.main.mode == this.main.MODE_DRAW_SUBMIT)){
 		this.main.mode = this.main.MODE_CLICK_ON_TEST;
 	}
 };
 
-
-UI.prototype.onClearClick = function(){
-	if (this.main.mode == this.main.MODE_DRAW){
+// 제출 후에도 클리어버튼 활성화 되도록 변경
+UI.prototype.onClearClick = function(){ 
+	if ((this.main.mode == this.main.MODE_DRAW) || (this.main.mode == this.main.MODE_DRAW_SUBMIT)){
 		this.main.mode = this.main.MODE_CLICK_ON_CLEAR;
 	}
 };
 
 
+//제출 버튼으로 기능 변경 (이미지는 아직 안바꿈)
 UI.prototype.onMoreGamesClick = function(){
-	window.open("http://www.askforgametask.com", "_blank");
+	if (this.main.mode == this.main.MODE_DRAW){
+		this.main.mode = this.main.MODE_DRAW_SUBMIT;
+	}
 };
 
 
@@ -168,6 +171,10 @@ UI.prototype.showDoodlePrediction = function(aPredictions){
 	this.txtDoodlePrediction.text = "It's "  + App.DATASETS[aPredictions[0]] + ".";
 };
 
+// showDoodlePrediction을 그대로 사용하면 클리어 버튼 실행 시 텍스트가 반짝거리는 버그가 있어서 추가 
+//UI.prototype.ClearText = function(){
+//	this.txtDoodlePrediction.text = "";
+//};
 
 UI.prototype.showStatusBar = function(strText){
 	this.txtStatBar.text = strText;

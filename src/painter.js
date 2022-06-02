@@ -134,9 +134,12 @@ Painter.prototype.draw = function(x, y){
 
 		this.resizeDrawing();
 		
-	} else { 
-		this.recognize();
-	}
+	} 
+	// 마우스가 페인터 밖으로 벗어났을 때 분석하는 부분
+	// 제출했을 때만 분석해야하므로 주석처리
+	//else { 
+	//	this.recognize();
+	//}
 };
 
 
