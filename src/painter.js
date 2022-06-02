@@ -172,6 +172,7 @@ Painter.prototype.resizeDrawing = function(){
 };
 
 
+// 기존 recognize
 Painter.prototype.recognize = function(){
 	if (this.isDrawing){ 
 		this.bmpFinalDrawing.update();
@@ -190,4 +191,39 @@ Painter.prototype.recognize = function(){
 
 		this.isDrawing = false;
 	}
+};
+
+// 텍스트 + 이모티콘 출력할 수 있도록 recognize 수정
+Painter.prototype.recognize2 = function(){
+	if (this.isDrawing){ 
+		this.bmpFinalDrawing.update();
+				
+
+		var aPixels = Float32Array.from(
+			this.bmpFinalDrawing.pixels.map(function (cv){return cv & 255;})
+		);
+		
+
+		var aNormalizedPixels = aPixels.map(function (cv){return (255-cv)/255.0;});
+						
+
+		// 한 번만 분석할 수 있도록 isDrawing = false 처리
+		this.isDrawing = false; 
+		
+		// 페인터 리셋
+		this.main.painter.reset(); 
+		
+		// 텍스트 + 이모티콘 출력할 수 있도록 predictDoodle 수정함
+		this.main.cnn.predictDoodle2(aNormalizedPixels);
+	}
+};
+
+// 이모티콘 출력하기
+Painter.prototype.showEmoticon = function() {
+	this.testimg = this.main.game.add.sprite(945, 200, 'testimg'); // 좌표는 페인터 중앙
+};
+
+// 클리어 버튼 누르면 이모티콘 지우기
+Painter.prototype.clearEmoticon = function() {
+	this.testimg.destroy(); 
 };

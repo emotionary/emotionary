@@ -199,7 +199,7 @@ CNN.prototype.predictSamples = async function(){
 	this.isSamplesPredicted = true;
 };
 	
-
+// 기존 predictDoodle
 CNN.prototype.predictDoodle = async function(aNormalizedPixels){		
 	const input = tf.tensor2d(aNormalizedPixels, [1, this.IMAGE_SIZE]);
 		
@@ -215,6 +215,38 @@ CNN.prototype.predictDoodle = async function(aNormalizedPixels){
 	
 	tf.dispose(input);
 };
+
+
+// 텍스트 + 이모티콘 출력할 수 있도록 predictDoodle 수정
+CNN.prototype.predictDoodle2 = async function(aNormalizedPixels){		
+	const input = tf.tensor2d(aNormalizedPixels, [1, this.IMAGE_SIZE]);
+		
+	tf.tidy(() => {
+		const output = this.model.predict(
+			input.reshape([1, 28, 28, 1])
+		);
+		
+		const aPrediction = Array.from(output.argMax(1).dataSync());
+		
+		// aPrediction[0] : 0~9까지의 결과값 	ex) aPrediction[0] : 4
+		// App.DATASETS 데이터셋이 들어가있는 배열 
+		// App.DATASETS[숫자값] : main.js에서 정의했던 문자열
+
+		// 텍스트 결과 처리 
+		this.main.ui.showStatusBar("RESULT : " + App.DATASETS[aPrediction[0]]);
+		this.main.ui.showDoodlePrediction(aPrediction);
+
+		// 이모티콘 결과 처리
+		// 수정하는 법 : aPrediction[0]값을 showEmoticon에 인자로 넘겨주고, showEmoticon에 ifelse 달아주기
+		if(aPrediction[0] == 7){
+			this.main.painter.showEmoticon();
+		}
+	
+	});
+	
+	tf.dispose(input);
+};
+
 
 
 CNN.prototype.nextTrainBatch = function(batchSize){

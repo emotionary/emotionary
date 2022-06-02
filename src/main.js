@@ -44,6 +44,8 @@ App.MainState = function(){
 App.MainState.prototype = {
 
 	preload : function(){
+		this.game.load.image('testimg', '../assets/snowman_emoji.png'); // 이모티콘 테스트 파일
+
 		this.game.load.image('imgBack', '../assets/img_back_7.png');
 		this.game.load.image('imgDisable', '../assets/img_disable.png');
 		
@@ -182,8 +184,10 @@ App.MainState.prototype = {
 			case this.MODE_DRAW_SUBMIT:
 				this.ui.showStatusBar("MODE : this.MODE_DRAW_SUBMIT");
 
-				this.painter.recognize(); // 기존 : 마우스 다운 기준으로 분석
+				// this.painter.recognize(); // 기존 : 마우스 다운 기준으로 분석
 											// -> 변경 : 제출 버튼 누르면 분석
+
+				this.painter.recognize2(); ////// 텍스트 + 이모티콘 출력까지 해주도록 recognize 수정
 
 				//this.mode = this.MODE_DO_DRAW_SUBMIT; 나중에 필요하면 추가
 				break;
@@ -206,12 +210,9 @@ App.MainState.prototype = {
 
 
 			case this.MODE_CLICK_ON_CLEAR:
-				this.painter.reset();
-				this.ui.txtDoodlePrediction.setText("");
-				
-				// painter.reset() 후 이모티콘 삭제 처리 되지 않으면 
-				// painter에 삭제함수 만들고 여기에 불러와서 삭제 처리
-				
+				this.painter.reset(); // 페인터 리셋
+				this.ui.txtDoodlePrediction.setText(""); // 텍스트 리셋
+				this.painter.clearEmoticon(); // 이모티콘 삭제
 				this.mode = this.MODE_DRAW;
 				break;
 		}
