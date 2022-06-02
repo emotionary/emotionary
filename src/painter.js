@@ -72,11 +72,11 @@ Painter.prototype.draw = function(x, y){
 					
 
 		this.bmpOrigDrawing.circle(this.pencil.x, this.pencil.y, 4, '#000');
-					
+
 		if (!this.isDrawing){
 
 			this.isDrawing = true;
-						
+
 		} else {
 
 			var xc = (this.pencil.prevX + this.pencil.x) / 2;
@@ -94,9 +94,8 @@ Painter.prototype.draw = function(x, y){
 			ctx.stroke();
 
 			ctx.closePath();
-		}
-					
-
+		}			
+		
 		if (this.pencil.left < this.cropArea.left){
 			this.cropArea.left = this.pencil.left;
 			if (this.cropArea.left < 0) this.cropArea.left = 0;
@@ -149,7 +148,7 @@ Painter.prototype.resizeDrawing = function(){
 		this.cropArea.width + this.cropArea.tx * 2, 
 		this.cropArea.height + this.cropArea.ty * 2
 	);
-
+	
 
 	this.bmpCropDrawing.fill(255, 255, 255);
 	
@@ -208,7 +207,7 @@ Painter.prototype.recognize2 = function(){
 						
 
 		// 한 번만 분석할 수 있도록 isDrawing = false 처리
-		this.isDrawing = false; 
+		this.isDrawing = false;
 		
 		// 페인터 리셋
 		this.main.painter.reset(); 

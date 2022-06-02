@@ -71,21 +71,21 @@ UI.prototype.enableButtons = function(){
 
 // 제출 후에도 학습버튼 활성화 되도록 변경
 UI.prototype.onTrainClick = function(){
-	if (this.main.mode == this.main.MODE_DRAW || this.main.mode == this.main.MODE_DRAW_SUBMIT){
+	if (this.main.mode == this.main.MODE_DRAW || this.main.mode == this.main.MODE_DO_DRAW_SUBMIT){
 		this.main.mode = this.main.MODE_CLICK_ON_TRAIN;
 	}
 };
 
 // 제출 후에도 검증버튼 활성화 되도록 변경
 UI.prototype.onTestClick = function(){ 
-	if ((this.main.mode == this.main.MODE_DRAW) || (this.main.mode == this.main.MODE_DRAW_SUBMIT)){
+	if (this.main.mode == this.main.MODE_DRAW || this.main.mode == this.main.MODE_DO_DRAW_SUBMIT){
 		this.main.mode = this.main.MODE_CLICK_ON_TEST;
 	}
 };
 
 // 제출 후에도 클리어버튼 활성화 되도록 변경
 UI.prototype.onClearClick = function(){ 
-	if ((this.main.mode == this.main.MODE_DRAW) || (this.main.mode == this.main.MODE_DRAW_SUBMIT)){
+	if (this.main.mode == this.main.MODE_DRAW || this.main.mode == this.main.MODE_DO_DRAW_SUBMIT){
 		this.main.mode = this.main.MODE_CLICK_ON_CLEAR;
 	}
 };

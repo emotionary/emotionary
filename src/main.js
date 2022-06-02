@@ -175,6 +175,9 @@ App.MainState.prototype = {
 				} else {
 					//제출 눌렀을때 분석하도록 변경할것이므로 일단 주석처리
 					//this.painter.recognize();
+
+					// 마우스다운 상태가 아닐 때는 isDrawing이 false여야 stroke 되지 않음
+					this.painter.isDrawing = false;
 				}
 
 				break;
@@ -184,18 +187,21 @@ App.MainState.prototype = {
 			case this.MODE_DRAW_SUBMIT:
 				this.ui.showStatusBar("MODE : this.MODE_DRAW_SUBMIT");
 
+				this.painter.isDrawing = true; // recognize 실행 위해 isDrawing을 true로 전환
+
 				// this.painter.recognize(); // 기존 : 마우스 다운 기준으로 분석
 											// -> 변경 : 제출 버튼 누르면 분석
 
 				this.painter.recognize2(); ////// 텍스트 + 이모티콘 출력까지 해주도록 recognize 수정
 
-				//this.mode = this.MODE_DO_DRAW_SUBMIT; 나중에 필요하면 추가
+				this.mode = this.MODE_DO_DRAW_SUBMIT; // 제출 후 UI 수정사항 위해 모드 변경
 				break;
 			
 			
 			// 그림 분석 중 버튼, UI 수정 (추가한 모드)
 			case this.MODE_DO_DRAW_SUBMIT:
-
+				this.ui.showStatusBar("MODE : this.MODE_DO_DRAW_SUBMIT");
+				this.painter.isDrawing = false; // recognize가 계속 실행되지 않도록 isDrawing을 false로 전환
 				break;
 			
 			case this.MODE_CLICK_ON_TRAIN:
