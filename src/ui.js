@@ -11,8 +11,6 @@ var UI = function(main){
 	this.btnClear = game.add.button(842, 625, 'btnClear', this.onClearClick, this);
 	this.btnMoreGames = game.add.button(1048, 625, 'btnMoreGames', this.onMoreGamesClick, this);
 	
-	this.btnAuthor = game.add.button(1130, 703, 'btnAuthor', this.onMoreGamesClick, this);
-	this.btnAuthor.anchor.setTo(0.5);
 	
 
 	this.bmpAccuChart = game.add.bitmapData(350, 250);
@@ -51,6 +49,11 @@ var UI = function(main){
 
 	this.txtDoodlePrediction = game.add.bitmapText(1050, 572, "fntBlackChars", "", 36);
 	this.txtDoodlePrediction.anchor.setTo(0.5);
+
+	// submit 버튼 비활성화 이펙트
+	this.sprDisableSubmitEffect = game.add.sprite(1045, 610, 'imgDisable'); // 이펙트 (버튼 위치에 imgDisable 띄우기)
+	this.sprDisableSubmitEffect.width = 250; 							// 위치와 크기는 submit png 적용 후 수정
+	this.sprDisableSubmitEffect.height = 62;
 };
 
 
@@ -67,6 +70,18 @@ UI.prototype.enableButtons = function(){
 	this.btnTrain.revive();
 	this.btnTest.revive();
 	this.btnClear.revive();
+};
+
+// submit 버튼 비활성화
+UI.prototype.disableSubmitButton = function(){ // 결과 제출한 상태면 submit 버튼 비활성화. submit png 적용 후 버튼이름 수정해야함 
+	this.btnMoreGames.kill(); // 비활성화
+	this.sprDisableSubmitEffect.revive(); // 비활성화 이펙트
+};
+
+// submit 버튼 활성화
+UI.prototype.enableSubmitButton = function(){ // 그 외 상태면 submit 버튼 활성화. submit png 적용 후 버튼이름 수정해야함 
+	this.btnMoreGames.revive(); // 활성화
+	this.sprDisableSubmitEffect.kill(); // 비활성화 이펙트 끄기
 };
 
 // 제출 후에도 학습버튼 활성화 되도록 변경

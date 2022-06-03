@@ -233,7 +233,7 @@ CNN.prototype.predictDoodle2 = async function(aNormalizedPixels){
 		// App.DATASETS[숫자값] : main.js에서 정의했던 문자열
 
 		// 텍스트 결과 처리 
-		this.main.ui.showStatusBar("RESULT : " + App.DATASETS[aPrediction[0]]);
+		this.main.ui.showStatusBar("This is how I guessed! Is it right?"); // 결과 상태바
 		this.main.ui.showDoodlePrediction(aPrediction);
 
 		// 이모티콘 결과 처리

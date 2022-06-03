@@ -53,7 +53,6 @@ App.MainState.prototype = {
 		this.game.load.image('btnTest', '../assets/btn_test.png');
 		this.game.load.image('btnClear', '../assets/btn_clear.png');
 		this.game.load.image('btnMoreGames', '../assets/btn_moregames.png');
-		this.game.load.image('btnAuthor', '../assets/btn_author.png');
 		
 		this.load.bitmapFont('fntBlackChars', '../assets/fnt_black_chars.png', '../assets/fnt_black_chars.fnt');
 	},
@@ -88,7 +87,8 @@ App.MainState.prototype = {
 				this.painter.reset();
 				this.painter.disable();
 				this.ui.disableButtons();
-				
+				this.ui.disableSubmitButton(); // submit 버튼 비활성화
+
 				this.mode = this.MODE_OPEN_FILE;
 				break;
 				
@@ -130,6 +130,7 @@ App.MainState.prototype = {
 			case this.MODE_START_TRAIN:
 				this.painter.disable();
 				this.ui.disableButtons();
+				this.ui.disableSubmitButton(); // submit 버튼 비활성화
 					
 				this.cnn.train();
 				
@@ -157,6 +158,7 @@ App.MainState.prototype = {
 				if (this.cnn.isSamplesPredicted){
 					this.painter.enable();
 					this.ui.enableButtons();
+					this.ui.enableSubmitButton(); // submit 버튼 활성화
 					
 					this.ui.showStatusBar(
 						"Draw " + App.DATASETS.join(", ") + 
@@ -169,6 +171,11 @@ App.MainState.prototype = {
 				
 
 			case this.MODE_DRAW:
+				this.ui.showStatusBar( // 클리어 버튼 눌렀을 때 상태바
+					"Draw " + App.DATASETS.join(", ") + 
+					" to recognize your drawing!"
+				);
+
 				if (this.game.input.mousePointer.isDown){
 					this.painter.draw(this.game.input.x, this.game.input.y);
 					
@@ -185,7 +192,7 @@ App.MainState.prototype = {
 
 			// 제출 버튼 눌렀을때 (추가한 모드)
 			case this.MODE_DRAW_SUBMIT:
-				this.ui.showStatusBar("MODE : this.MODE_DRAW_SUBMIT");
+				//this.ui.showStatusBar("MODE : this.MODE_DRAW_SUBMIT");
 
 				this.painter.isDrawing = true; // recognize 실행 위해 isDrawing을 true로 전환
 
@@ -200,7 +207,10 @@ App.MainState.prototype = {
 			
 			// 그림 분석 중 버튼, UI 수정 (추가한 모드)
 			case this.MODE_DO_DRAW_SUBMIT:
-				this.ui.showStatusBar("MODE : this.MODE_DO_DRAW_SUBMIT");
+
+				this.ui.disableSubmitButton(); // submit 버튼 비활성화
+
+				// this.ui.showStatusBar("MODE : this.MODE_DO_DRAW_SUBMIT");
 				this.painter.isDrawing = false; // recognize가 계속 실행되지 않도록 isDrawing을 false로 전환
 				break;
 			
@@ -219,6 +229,9 @@ App.MainState.prototype = {
 				this.painter.reset(); // 페인터 리셋
 				this.ui.txtDoodlePrediction.setText(""); // 텍스트 리셋
 				this.painter.clearEmoticon(); // 이모티콘 삭제
+
+				this.ui.enableSubmitButton(); // submit 버튼 활성화
+
 				this.mode = this.MODE_DRAW;
 				break;
 		}
