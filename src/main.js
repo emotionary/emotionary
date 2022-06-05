@@ -62,7 +62,7 @@ App.MainState.prototype = {
 		this.game.load.image('btnTrain', '../assets/btn_train.png');
 		this.game.load.image('btnTest', '../assets/btn_test.png');
 		this.game.load.image('btnClear', '../assets/btn_clear.png');
-		this.game.load.image('btnMoreGames', '../assets/btn_submit.png');
+		this.game.load.image('btnSubmit', '../assets/btn_submit.png');
 		
 		this.load.bitmapFont('fntBlackChars', '../assets/fnt_black_chars.png', '../assets/fnt_black_chars.fnt');
 	},

@@ -9,7 +9,7 @@ var UI = function(main){
 	this.btnTrain = game.add.button(460, 625, 'btnTrain', this.onTrainClick, this);
 	this.btnTest = game.add.button(652, 625, 'btnTest', this.onTestClick, this);
 	this.btnClear = game.add.button(842, 625, 'btnClear', this.onClearClick, this);
-	this.btnMoreGames = game.add.button(1118, 625, 'btnMoreGames', this.onMoreGamesClick, this);
+	this.btnSubmit = game.add.button(1118, 625, 'btnSubmit', this.onSubmitClick, this);
 	
 	
 
@@ -74,13 +74,13 @@ UI.prototype.enableButtons = function(){
 
 // submit 버튼 비활성화
 UI.prototype.disableSubmitButton = function(){ // 결과 제출한 상태면 submit 버튼 비활성화. submit png 적용 후 버튼이름 수정해야함 
-	this.btnMoreGames.kill(); // 비활성화
+	this.btnSubmit.kill(); // 비활성화
 	this.sprDisableSubmitEffect.revive(); // 비활성화 이펙트
 };
 
 // submit 버튼 활성화
 UI.prototype.enableSubmitButton = function(){ // 그 외 상태면 submit 버튼 활성화. submit png 적용 후 버튼이름 수정해야함 
-	this.btnMoreGames.revive(); // 활성화
+	this.btnSubmit.revive(); // 활성화
 	this.sprDisableSubmitEffect.kill(); // 비활성화 이펙트 끄기
 };
 
@@ -107,7 +107,7 @@ UI.prototype.onClearClick = function(){
 
 
 //제출 버튼으로 기능 변경
-UI.prototype.onMoreGamesClick = function(){
+UI.prototype.onSubmitClick = function(){
 	if (this.main.mode == this.main.MODE_DRAW){
 		this.main.mode = this.main.MODE_DRAW_SUBMIT;
 	}
