@@ -11,7 +11,7 @@ window.onload = function () {
 var App = App || {};
 
 
-App.DATASETS = ['bee', 'candle', 'car', 'clock', 'fish', 'guitar', 'octopus', 'snowman', 'tree', 'umbrella'];
+App.DATASETS = ['apple', 'carrot', 'butterfly', 'scissors', 'zebra', 'flower', 'eye', 'rabbit', 'snowflake', 'pizza'];
 
 App.NUM_SAMPLES = 16;
 
@@ -45,16 +45,16 @@ App.MainState.prototype = {
 
 	preload : function(){
 		// 이모티콘 테스트 파일
-		this.game.load.image('Bee', '../assets/emoji_bee.png');
-		this.game.load.image('Candle', '../assets/emoji_candle.png');
-		this.game.load.image('Car', '../assets/emoji_car.png');
-		this.game.load.image('Clock', '../assets/emoji_clock.png');
-		this.game.load.image('Fish', '../assets/emoji_fish.png');
-		this.game.load.image('Guitar', '../assets/emoji_guitar.png');
-		this.game.load.image('Octopus', '../assets/emoji_octopus.png');
-		this.game.load.image('Snowman', '../assets/emoji_snowman.png');
-		this.game.load.image('Tree', '../assets/emoji_tree.png');
-		this.game.load.image('Umbrella', '../assets/emoji_umbrella.png');
+		this.game.load.image('Apple', '../assets/emoji_apple.png');
+		this.game.load.image('Carrot', '../assets/emoji_carrot.png');
+		this.game.load.image('Butterfly', '../assets/emoji_butterfly.png');
+		this.game.load.image('Scissors', '../assets/emoji_scissors.png');
+		this.game.load.image('Zebra', '../assets/emoji_zebra.png');
+		this.game.load.image('Flower', '../assets/emoji_flower.png');
+		this.game.load.image('Eye', '../assets/emoji_eye.png');
+		this.game.load.image('Rabbit', '../assets/emoji_rabbit.png');
+		this.game.load.image('Snowflake', '../assets/emoji_snowflake.png');
+		this.game.load.image('Pizza', '../assets/emoji_pizza.png');
 
 		this.game.load.image('imgBack', '../assets/img_back_8.png');
 		this.game.load.image('imgDisable', '../assets/img_disable.png');

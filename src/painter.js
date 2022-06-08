@@ -220,34 +220,34 @@ Painter.prototype.recognize2 = function(){
 // 이모티콘 출력하기
 Painter.prototype.showEmoticon = function(aPredictions) {
 	if(aPredictions[0] == 0){
-		this.Bee = this.main.game.add.sprite(945, 200, 'Bee');
+		this.testing = this.main.game.add.sprite(945, 200, 'Apple');
 	}
 	else if(aPredictions[0] == 1) {
-		this.testing = this.main.game.add.sprite(945, 200, 'Candle');
+		this.testing = this.main.game.add.sprite(945, 200, 'Carrot');
 	}
 	else if(aPredictions[0] == 2) {
-		this.testing = this.main.game.add.sprite(945, 200, 'Car');
+		this.testing = this.main.game.add.sprite(945, 200, 'Butterfly');
 	}
 	else if(aPredictions[0] == 3) {
-		this.testing = this.main.game.add.sprite(945, 200, 'Clock');
+		this.testing = this.main.game.add.sprite(945, 200, 'Scissors');
 	}
 	else if(aPredictions[0] == 4) {
-		this.testing = this.main.game.add.sprite(945, 200, 'Fish');
+		this.testing = this.main.game.add.sprite(945, 200, 'Zebra');
 	}
 	else if(aPredictions[0] == 5) {
-		this.testing = this.main.game.add.sprite(945, 200, 'Guitar');
+		this.testing = this.main.game.add.sprite(945, 200, 'Flower');
 	}
 	else if(aPredictions[0] == 6) {
-		this.testing = this.main.game.add.sprite(945, 200, 'Octopus');
+		this.testing = this.main.game.add.sprite(945, 200, 'Eye');
 	}
 	else if(aPredictions[0] == 7) {
-		this.testing = this.main.game.add.sprite(945, 200, 'Snowman');
+		this.testing = this.main.game.add.sprite(945, 200, 'Rabbit');
 	}
 	else if(aPredictions[0] == 8) {
-		this.testing = this.main.game.add.sprite(945, 200, 'Tree');
+		this.testing = this.main.game.add.sprite(945, 200, 'Snowflake');
 	}
 	else if(aPredictions[0] == 9){
-		this.testing = this.main.game.add.sprite(945, 200, 'Umbrella');
+		this.testing = this.main.game.add.sprite(945, 200, 'Pizza');
 	}
 };
 
