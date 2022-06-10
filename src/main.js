@@ -1,3 +1,27 @@
+ /***********************************************************************************
+*
+* PROGRAM:
+*   Emotionary
+*
+* MODULE:   
+*   main.js - Main Program
+*
+* EXTERNAL LIBRARIES:
+*   phaser.min.js - Phaser 2 Framework
+*   tensorflow.js - TensorFlow Library
+*
+* DESCRIPTION:
+*   그림을 그리면 이모티콘으로 변환해주는 인공지능 게임
+*
+* LINKS:
+*   @repos      https://www.github.com/emotionary
+*
+* AUTHOR:
+*   남채희 왕서희 이다미 정권영
+*
+/***********************************************************************************/
+
+
 window.onload = function () {	
 
 	var game = new Phaser.Game(1280, 720, Phaser.CANVAS);
