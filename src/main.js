@@ -11,7 +11,7 @@ window.onload = function () {
 var App = App || {};
 
 
-App.DATASETS = ['bee', 'candle', 'car', 'clock', 'fish', 'guitar', 'octopus', 'snowman', 'tree', 'umbrella'];
+App.DATASETS = ['apple', 'carrot', 'butterfly', 'scissors', 'zebra', 'flower', 'eye', 'rabbit', 'snowflake', 'pizza'];
 
 App.NUM_SAMPLES = 16;
 
@@ -44,15 +44,25 @@ App.MainState = function(){
 App.MainState.prototype = {
 
 	preload : function(){
-		this.game.load.image('testimg', '../assets/snowman_emoji.png'); // 이모티콘 테스트 파일
+		// 이모티콘 테스트 파일
+		this.game.load.image('Apple', '../assets/emoji_apple.png');
+		this.game.load.image('Carrot', '../assets/emoji_carrot.png');
+		this.game.load.image('Butterfly', '../assets/emoji_butterfly.png');
+		this.game.load.image('Scissors', '../assets/emoji_scissors.png');
+		this.game.load.image('Zebra', '../assets/emoji_zebra.png');
+		this.game.load.image('Flower', '../assets/emoji_flower.png');
+		this.game.load.image('Eye', '../assets/emoji_eye.png');
+		this.game.load.image('Rabbit', '../assets/emoji_rabbit.png');
+		this.game.load.image('Snowflake', '../assets/emoji_snowflake.png');
+		this.game.load.image('Pizza', '../assets/emoji_pizza.png');
 
-		this.game.load.image('imgBack', '../assets/img_back_7.png');
+		this.game.load.image('imgBack', '../assets/img_back_8.png');
 		this.game.load.image('imgDisable', '../assets/img_disable.png');
 		
 		this.game.load.image('btnTrain', '../assets/btn_train.png');
 		this.game.load.image('btnTest', '../assets/btn_test.png');
 		this.game.load.image('btnClear', '../assets/btn_clear.png');
-		this.game.load.image('btnMoreGames', '../assets/btn_moregames.png');
+		this.game.load.image('btnSubmit', '../assets/btn_submit.png');
 		
 		this.load.bitmapFont('fntBlackChars', '../assets/fnt_black_chars.png', '../assets/fnt_black_chars.fnt');
 	},
@@ -199,7 +209,7 @@ App.MainState.prototype = {
 				// this.painter.recognize(); // 기존 : 마우스 다운 기준으로 분석
 											// -> 변경 : 제출 버튼 누르면 분석
 
-				this.painter.recognize2(); ////// 텍스트 + 이모티콘 출력까지 해주도록 recognize 수정
+				this.painter.recognize(); ////// 텍스트 + 이모티콘 출력까지 해주도록 recognize 수정
 
 				this.mode = this.MODE_DO_DRAW_SUBMIT; // 제출 후 UI 수정사항 위해 모드 변경
 				break;
@@ -228,8 +238,11 @@ App.MainState.prototype = {
 			case this.MODE_CLICK_ON_CLEAR:
 				this.painter.reset(); // 페인터 리셋
 				this.ui.txtDoodlePrediction.setText(""); // 텍스트 리셋
-				this.painter.clearEmoticon(); // 이모티콘 삭제
-
+				
+				if(this.painter.emoticon){
+					this.painter.clearEmoticon(); // 이모티콘 삭제
+				}
+				
 				this.ui.enableSubmitButton(); // submit 버튼 활성화
 
 				this.mode = this.MODE_DRAW;

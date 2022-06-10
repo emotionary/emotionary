@@ -170,30 +170,8 @@ Painter.prototype.resizeDrawing = function(){
 	this.bmpFinalDrawing.copy(this.bmpDownSample2, null, null, null, null, 1, 1, 26, 26);
 };
 
-
-// 기존 recognize
-Painter.prototype.recognize = function(){
-	if (this.isDrawing){ 
-		this.bmpFinalDrawing.update();
-				
-
-		var aPixels = Float32Array.from(
-			this.bmpFinalDrawing.pixels.map(function (cv){return cv & 255;})
-		);
-		
-
-		var aNormalizedPixels = aPixels.map(function (cv){return (255-cv)/255.0;});
-		
-
-		this.main.cnn.predictDoodle(aNormalizedPixels);
-						
-
-		this.isDrawing = false;
-	}
-};
-
 // 텍스트 + 이모티콘 출력할 수 있도록 recognize 수정
-Painter.prototype.recognize2 = function(){
+Painter.prototype.recognize = function(){
 	if (this.isDrawing){ 
 		this.bmpFinalDrawing.update();
 				
@@ -213,16 +191,45 @@ Painter.prototype.recognize2 = function(){
 		this.main.painter.reset(); 
 		
 		// 텍스트 + 이모티콘 출력할 수 있도록 predictDoodle 수정함
-		this.main.cnn.predictDoodle2(aNormalizedPixels);
+		this.main.cnn.predictDoodle(aNormalizedPixels);
 	}
 };
 
 // 이모티콘 출력하기
-Painter.prototype.showEmoticon = function() {
-	this.testimg = this.main.game.add.sprite(945, 200, 'testimg'); // 좌표는 페인터 중앙
+Painter.prototype.showEmoticon = function(aPredictions) {
+	if(aPredictions[0] == 0){
+		this.emoticon = this.main.game.add.sprite(945, 200, 'Apple');
+	}
+	else if(aPredictions[0] == 1) {
+		this.emoticon = this.main.game.add.sprite(945, 200, 'Carrot');
+	}
+	else if(aPredictions[0] == 2) {
+		this.emoticon = this.main.game.add.sprite(945, 200, 'Butterfly');
+	}
+	else if(aPredictions[0] == 3) {
+		this.emoticon = this.main.game.add.sprite(945, 200, 'Scissors');
+	}
+	else if(aPredictions[0] == 4) {
+		this.emoticon = this.main.game.add.sprite(945, 200, 'Zebra');
+	}
+	else if(aPredictions[0] == 5) {
+		this.emoticon = this.main.game.add.sprite(945, 200, 'Flower');
+	}
+	else if(aPredictions[0] == 6) {
+		this.emoticon = this.main.game.add.sprite(945, 200, 'Eye');
+	}
+	else if(aPredictions[0] == 7) {
+		this.emoticon = this.main.game.add.sprite(945, 200, 'Rabbit');
+	}
+	else if(aPredictions[0] == 8) {
+		this.emoticon = this.main.game.add.sprite(945, 200, 'Snowflake');
+	}
+	else if(aPredictions[0] == 9){
+		this.emoticon = this.main.game.add.sprite(945, 200, 'Pizza');
+	}
 };
 
 // 클리어 버튼 누르면 이모티콘 지우기
 Painter.prototype.clearEmoticon = function() {
-	this.testimg.destroy(); 
+	this.emoticon.destroy();  
 };

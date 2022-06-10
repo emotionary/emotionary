@@ -198,27 +198,9 @@ CNN.prototype.predictSamples = async function(){
 	
 	this.isSamplesPredicted = true;
 };
-	
-// 기존 predictDoodle
-CNN.prototype.predictDoodle = async function(aNormalizedPixels){		
-	const input = tf.tensor2d(aNormalizedPixels, [1, this.IMAGE_SIZE]);
-		
-	tf.tidy(() => {
-		const output = this.model.predict(
-			input.reshape([1, 28, 28, 1])
-		);
-		
-		const aPrediction = Array.from(output.argMax(1).dataSync());
-		
-		this.main.ui.showDoodlePrediction(aPrediction);
-	});
-	
-	tf.dispose(input);
-};
-
 
 // 텍스트 + 이모티콘 출력할 수 있도록 predictDoodle 수정
-CNN.prototype.predictDoodle2 = async function(aNormalizedPixels){		
+CNN.prototype.predictDoodle = async function(aNormalizedPixels){		
 	const input = tf.tensor2d(aNormalizedPixels, [1, this.IMAGE_SIZE]);
 		
 	tf.tidy(() => {
@@ -233,14 +215,12 @@ CNN.prototype.predictDoodle2 = async function(aNormalizedPixels){
 		// App.DATASETS[숫자값] : main.js에서 정의했던 문자열
 
 		// 텍스트 결과 처리 
-		this.main.ui.showStatusBar("This is how I guessed! Is it right?"); // 결과 상태바
+		this.main.ui.showStatusBar("This is what I guessed! Is it right?"); // 결과 상태바
 		this.main.ui.showDoodlePrediction(aPrediction);
 
 		// 이모티콘 결과 처리
 		// 수정하는 법 : aPrediction[0]값을 showEmoticon에 인자로 넘겨주고, showEmoticon에 ifelse 달아주기
-		if(aPrediction[0] == 7){
-			this.main.painter.showEmoticon();
-		}
+		this.main.painter.showEmoticon(aPrediction);
 	
 	});
 	
