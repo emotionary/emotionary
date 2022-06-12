@@ -7,7 +7,7 @@
 ## :frog: Project Info
 **Phaser 2 framework**와 **TensorFlow library**를 사용해 기계학습 인공지능을 구현했습니다.  
 **CNN 모델**을 만들어 이미지에 최적화된 모델을 설계했습니다.  
-데이터셋은 구글의 **Quick Draw Dataset**에서 추출해 제작했습니다.  
+데이터셋은 구글의 [Quick Draw Dataset](https://github.com/googlecreativelab/quickdraw-dataset)에서 추출해 제작했습니다.  
 자세한 개발과정은 이슈에서 확인하실 수 있습니다.
 
 ## :bulb: Running the Game
