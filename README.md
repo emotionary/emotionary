@@ -28,7 +28,7 @@
 
 ## :eyes: Links
 Github https://www.github.com/emotionary  
-Youtube https://youtube/
+Youtube https://youtu.be/SvrUB0fozd0
 
 ## :earth_africa: Authors
 남채희 https://github.com/chehhy  
